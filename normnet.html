@@ -95,7 +95,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:url" content="http://spalaciob.github.io/normnet.html" />
     <meta property="og:image" content="http://spalaciob.github.io/img/pipeline.png" />
-    <meta property="og:description" content="An autoencoder to prepend to your network showing you what it's looking for (to debug deep networks)." /> 
+    <meta property="og:description" content="An autoencoder to prepend to your network showing you what it's looking for (to debug deep networks)." />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90590383-2"></script>
@@ -105,6 +105,7 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-90590383-2');
+      ga('set', 'anonymizeIp', true);
     </script>
 
 
@@ -197,8 +198,8 @@
       </a>
       <div>
         <pre class="citation">
-          @InProceedings{palaciofolz2018normnets,
-          author = {Palacio Sebastian, Folz Joachim, Hees Joern, Raue Federico, Dengel Andreas},
+          @InProceedings{palaciofolz2018finetunedecoders,
+          author = {Palacio Sebastian, Folz Joachim, Hees Joern, Raue Federico, Borth Damian, Dengel Andreas},
           title = {What do Deep Networks Like to See},
           booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
           month = {June},
@@ -257,7 +258,12 @@
       </div>
     </div>
 
-    <div id="footer">
+    <div id="footer" class="container">
+
+
+        <h6>In compiance with GDPR, please be aware that anonymous Google Analytics is used for this webpage. For everything else, this webpage adheres to <a href="http://www.dfki.uni-kl.de/datenschutz/data-protection-en.html">DFKI's Data Protection Regulations.</a></h6>
+
+
     </div>
 
     <!-- Optional JavaScript -->
