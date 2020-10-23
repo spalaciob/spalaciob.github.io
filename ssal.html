@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+      body {
+        /*font-family: 'Lato', sans-serif;*/
+        font-weight: 300;
+        color: #333;
+        font-size: 18px;
+      }
+
+      h1 {
+        font-size: 40px;
+        color: #555;
+        font-weight: 400;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        margin-top: 50px;
+        margin-bottom: 10px;
+      }
+
+      .authors {
+        color: #222;
+        font-size: 24px;
+        font-weight: 300;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 40px;
+      }
+      .authorsnote {
+        font-size: 14px;
+        text-align: center;
+      }
+      .logoimg {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .container-fluid {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .container {
+        margin-top: 30px;
+      }
+      #footer {
+        margin-bottom: 100px;
+      }
+      .thumbs {
+        -webkit-box-shadow: 1px 1px 3px #999;
+        -moz-box-shadow: 1px 1px 3px #999;
+        box-shadow: 1px 1px 3px #999;
+        margin-bottom: 20px;
+      }
+      h2 {
+        font-size: 24px;
+        font-weight: 900;
+        border-bottom: 1px solid #999;
+        margin-bottom: 20px;
+      }
+
+      pre {
+        display: block;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+        word-break: break-all;
+        word-wrap: break-word;
+        color: #333;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      /* The ribbons */
+
+      .corner-ribbon{
+        width: 400px;
+        background: #e43;
+        position: absolute;
+        top: 25px;
+        left: -50px;
+        text-align: center;
+        line-height: 50px;
+        letter-spacing: 1px;
+        color: #f0f0f0;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      /* Custom styles */
+
+      .corner-ribbon.sticky{
+        position: fixed;
+      }
+
+      .corner-ribbon.shadow{
+        box-shadow: 0 0 3px rgba(0,0,0,.3);
+      }
+
+      .corner-ribbon.top-left{
+        top: 70px;
+        left: -80px;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      .corner-ribbon.white{background: #f0f0f0; color: #555;}
+      .corner-ribbon.black{background: #333;}
+      .corner-ribbon.grey{background: #999;}
+      .corner-ribbon.blue{background: #39d;}
+      .corner-ribbon.green{background: #2c7;}
+      .corner-ribbon.turquoise{background: #1b9;}
+      .corner-ribbon.purple{background: #95b;}
+      .corner-ribbon.red{background: #e43;}
+      .corner-ribbon.orange{background: #e82;}
+      .corner-ribbon.yellow{background: #ec0;}
+
+    </style>
+
+    <title>CVPR 2018 What do Deep Networks Like to See</title>
+
+    <!-- SEO: the text snippet often shown beneath your search result below the title -->
+    <meta name="description" content="An autoencoder to prepend to your network showing you what it's looking for (to debug deep networks).">
+
+     <!-- Twitter Card data -->
+    <meta name="twitter:card" value="summary">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="CVPR 2018 What do Deep Networks Like to See" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://spalaciob.github.io/normnet.html" />
+    <meta property="og:image" content="http://spalaciob.github.io/img/pipeline.png" />
+    <meta property="og:description" content="An autoencoder to prepend to your network showing you what it's looking for (to debug deep networks)." />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90590383-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-90590383-2');
+      ga('set', 'anonymizeIp', true);
+    </script>
+
+
+  </head>
+  <body>
+	<a href="https://spalaciob.blogspot.com/2018/10/what-do-deep-networks-like-to-see.html">
+    <div class="corner-ribbon top-left sticky black shadow">No deconvs used here!</div></a>
+    <div id="header" class="container">
+      <div class="row">
+        <div class="col">
+          <h1>What do Deep Networks Like to See</h1>
+          <div class="authors">
+            <a href="http://spalaciob.github.io">Sebastian Palacio</a>*,
+            <a href="http://www.dfki.uni-kl.de/~folz">Joachim Folz</a>*,
+            <a href="http://joernhees.de">Jörn Hees</a>,
+            <a href="http://rave78.com/">Federico Raue</a>,
+            <a href="http://www.dfki.uni-kl.de/~borth">Damian Borth</a>,
+            <a href="http://www.dfki.uni-kl.de/~dengel">Andreas Dengel</a>
+            <div class="authorsnote">
+              * equal contribution
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+          <div class="logoimg">
+            <img src="img/dfki-logo.jpg" height="60">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="logoimg">
+            <img src="img/tukl-logo.jpg" height="60">
+          </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="abstractdiv">
+      <h2>Abstract</h2>
+      <p class="abstract">
+        We propose a novel way to measure and understand convolutional
+        neural networks by quantifying the amount of input
+        signal they let in. To do this, an autoencoder (AE) was
+        fine-tuned on gradients from a pre-trained classifier with
+        fixed parameters. We compared the reconstructed samples
+        from AEs that were fine-tuned on a set of image classifiers
+        (AlexNet, VGG16, ResNet-50, and Inception v3) and found
+        substantial differences. The AE learns which aspects of the
+        input space to preserve and which ones to ignore, based on
+        the information encoded in the backpropagated gradients.
+        Measuring the changes in accuracy when the signal of one
+        classifier is used by a second one, a relation of total order
+        emerges. This order depends directly on each classifier’s input
+        signal but it does not correlate with classification accuracy
+        or network size. Further evidence of this phenomenon
+        is provided by measuring the normalized mutual information
+        between original images and auto-encoded reconstructions
+        from different fine-tuned AEs. These findings break
+        new ground in the area of neural network understanding,
+        opening a new way to reason, debug, and interpret their results.
+        We present four concrete examples in the literature
+        where observations can now be explained in terms of the
+        input signal that a model uses.
+      </p>
+      <div class="text-center">
+        <img class="img-fluid" src="img/pipeline.png" width="50%" alt="deep learning analysis pipeline with an autoencoder">
+      </div>
+    </div>
+
+    <div class="container" id="paperdiv">
+      <h2>Paper (accepted for publication at CVPR 2018)</h2>
+      <a href="normnet-cvpr2018.pdf">
+        <div class="thumbs">
+          <img src="img/paper1.jpeg" width="10%">
+          <img src="img/paper2.jpeg" width="10%">
+          <img src="img/paper3.jpeg" width="10%">
+          <img src="img/paper4.jpeg" width="10%">
+          <img src="img/paper5.jpeg" width="10%">
+          <img src="img/paper6.jpeg" width="10%">
+          <img src="img/paper7.jpeg" width="10%">
+          <img src="img/paper8.jpeg" width="10%">
+          <img src="img/paper9.jpeg" width="10%">
+        </div>
+      </a>
+      <div>
+        <pre class="citation">
+          Cite as: S2SNets \cite{palaciofolz2018s2snets}
+
+          @InProceedings{palaciofolz2018s2snets,
+            author = {Sebastian Palacio and Joachim Folz and Joern Hees and Federico Raue and Damian Borth and Andreas Dengel},
+            title = {What do Deep Networks Like to See},
+            booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+            month = {June},
+            year = {2018}
+          }
+        </pre>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Image Reconstructions using Fine-Tuned Autoencoders</h2>
+
+      <img src="img/reconstructions.png" width="100%" alt="image reconstruction artifacts for SegNet, AlexNet, VGG16 BN, VGGNet, ResNet-50, Inception v3">
+    </div>
+
+    <div class="container">
+      <h2>Supplemental Material</h2>
+
+      <div class="row">
+        <div class="col-sm-4 text-center">
+          <a href="https://cloud.dfki.de/owncloud/index.php/s/EszjCE5TjpLTsdo"><img src="img/sup-mat.png" width="57%" alt="PDF with supplementary material."></a>
+          <p>Additional experiments and sample reconstructions</p>
+        </div>
+        <div class="col-sm-4 text-center">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/WHe2SJsQ1_8"></iframe>
+          </div>
+          <p>Video summary</p>
+        </div>
+        <div class="col-sm-4 text-center">
+          <a href="https://github.com/spalaciob/s2snets-reconstruction"><img src="img/octocat.jpg" width="65%" alt="Example code."></a>
+          <p>Example prototype to reconstruct images using an autoencoder fine-tuned on ResNet50.</p>
+        </div>
+        <div class="col-sm-4 text-center">
+          <a href="https://spalaciob.blogspot.com/2018/10/what-do-deep-networks-like-to-see.html"><img src="https://1.bp.blogspot.com/-VCO-pyfErBg/W8Xo8zwn5UI/AAAAAAAAbgM/zSxRNea7H986ALWTWPDGZqxAiksP_Wk4ACLcBGAs/s1600/dl_blackbox.png" width="65%" alt="Blog Post"></a>
+          <p>Checkout our recent blog post about the paper!</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Acknowledgments</h2>
+      <p>This work was supported by the BMBF project DeFuseNN (Grant 01IW17002) and the NVIDIA AI Lab (NVAIL) program.</p>
+
+      <p>We would like to express our special gratitude to Adrian Ulges, Christian Schulze and
+      all members at the DLCC for their comments and support.</p>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+          <div class="logoimg">
+            <a href="http://dl.dfki.de"><img src="img/dlcc-logo.png" height="70"></a>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="logoimg">
+            <img src="img/nvidia-logo.png" height="60">
+          </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+    </div>
+
+    <div id="footer" class="container">
+
+
+        <h6>In compliance with GDPR, please be aware that anonymous Google Analytics is used for this webpage. For everything else, this webpage adheres to <a href="dataprotectionnoticedfki.html">DFKI's Data Protection Regulations.</a></h6>
+
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
