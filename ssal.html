@@ -127,20 +127,20 @@
 
     </style>
 
-    <title>CVPR 2018 What do Deep Networks Like to See</title>
+    <title>ICPR 2020 Contextual Classification using Self-Supervised Auxiliary Models for Image Classification</title>
 
     <!-- SEO: the text snippet often shown beneath your search result below the title -->
-    <meta name="description" content="An autoencoder to prepend to your network showing you what it's looking for (to debug deep networks).">
+    <meta name="description" content="Interpretable artificial neural network architecture uses self-supervised autogenous learning (SSAL) objectives to improve state-of-the-art image classifiers.">
 
      <!-- Twitter Card data -->
     <meta name="twitter:card" value="summary">
 
     <!-- Open Graph data -->
-    <meta property="og:title" content="CVPR 2018 What do Deep Networks Like to See" />
+    <meta property="og:title" content="ICPR 2020 Contextual Classification using Self-Supervised Auxiliary Models for Image Classification" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="http://spalaciob.github.io/normnet.html" />
-    <meta property="og:image" content="http://spalaciob.github.io/img/pipeline.png" />
-    <meta property="og:description" content="An autoencoder to prepend to your network showing you what it's looking for (to debug deep networks)." />
+    <meta property="og:url" content="http://spalaciob.github.io/ssal.html" />
+    <meta property="og:image" content="http://spalaciob.github.io/img/ssal_overview.png" />
+    <meta property="og:description" content="U." />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90590383-2"></script>
@@ -156,22 +156,17 @@
 
   </head>
   <body>
-	<a href="https://spalaciob.blogspot.com/2018/10/what-do-deep-networks-like-to-see.html">
-    <div class="corner-ribbon top-left sticky black shadow">No deconvs used here!</div></a>
+	<!--a href="https://spalaciob.blogspot.com/2018/10/what-do-deep-networks-like-to-see.html">
+    <div class="corner-ribbon top-left sticky black shadow">No deconvs used here!</div></a-->
     <div id="header" class="container">
       <div class="row">
         <div class="col">
-          <h1>What do Deep Networks Like to See</h1>
+          <h1>Contextual Classification using Self-Supervised Auxiliary Models for Image Classification</h1>
           <div class="authors">
-            <a href="http://spalaciob.github.io">Sebastian Palacio</a>*,
-            <a href="http://www.dfki.uni-kl.de/~folz">Joachim Folz</a>*,
+            <a href="http://spalaciob.github.io">Sebastian Palacio</a>,
+            <a href="http://www.dfki.uni-kl.de/~engler">Philipp Engler</a>,
             <a href="http://joernhees.de">Jörn Hees</a>,
-            <a href="http://rave78.com/">Federico Raue</a>,
-            <a href="http://www.dfki.uni-kl.de/~borth">Damian Borth</a>,
             <a href="http://www.dfki.uni-kl.de/~dengel">Andreas Dengel</a>
-            <div class="authorsnote">
-              * equal contribution
-            </div>
           </div>
 
         </div>
@@ -199,91 +194,82 @@
     <div class="container" id="abstractdiv">
       <h2>Abstract</h2>
       <p class="abstract">
-        We propose a novel way to measure and understand convolutional
-        neural networks by quantifying the amount of input
-        signal they let in. To do this, an autoencoder (AE) was
-        fine-tuned on gradients from a pre-trained classifier with
-        fixed parameters. We compared the reconstructed samples
-        from AEs that were fine-tuned on a set of image classifiers
-        (AlexNet, VGG16, ResNet-50, and Inception v3) and found
-        substantial differences. The AE learns which aspects of the
-        input space to preserve and which ones to ignore, based on
-        the information encoded in the backpropagated gradients.
-        Measuring the changes in accuracy when the signal of one
-        classifier is used by a second one, a relation of total order
-        emerges. This order depends directly on each classifier’s input
-        signal but it does not correlate with classification accuracy
-        or network size. Further evidence of this phenomenon
-        is provided by measuring the normalized mutual information
-        between original images and auto-encoded reconstructions
-        from different fine-tuned AEs. These findings break
-        new ground in the area of neural network understanding,
-        opening a new way to reason, debug, and interpret their results.
-        We present four concrete examples in the literature
-        where observations can now be explained in terms of the
-        input signal that a model uses.
+        Classification problems solved with deep neural networks (DNNs) typically rely on a closed world paradigm, and optimize over a single objective (e.g., minimization of the cross-entropy loss).
+        This setup dismisses all kinds of supporting signals that can be used to reinforce the existence or absence of particular patterns.
+        The increasing need for models that are interpretable by design makes the inclusion of said contextual signals a crucial necessity.
+        To this end, we introduce the notion of Self-Supervised Autogenous Learning (SSAL).
+        A SSAL objective is realized through one or more additional targets that are derived from the original supervised classification task, following architectural principles found in multi-task learning.
+        SSAL branches impose low-level priors into the optimization process (e.g., grouping).
+        The ability of using SSAL branches during inference, allow models to converge faster, focusing on a richer set of class-relevant features.
+        We equip state-of-the-art DNNs with SSAL objectives and report consistent improvements for all of them on CIFAR100 and Imagenet.
+        We show that SSAL models outperform similar state-of-the-art methods focused on contextual loss functions, auxiliary branches and hierarchical priors.
       </p>
       <div class="text-center">
-        <img class="img-fluid" src="img/pipeline.png" width="50%" alt="deep learning analysis pipeline with an autoencoder">
+        <img class="img-fluid" src="img/ssal_overview.png" width="50%" alt="deep learning self-supervised autogenous learning with auxiliary grouping classifiers">
       </div>
     </div>
 
     <div class="container" id="paperdiv">
-      <h2>Paper (accepted for publication at CVPR 2018)</h2>
-      <a href="normnet-cvpr2018.pdf">
+      <h2>Paper (accepted for publication at ICPR 2020)</h2>
+      <a href="ssal-icpr2020.pdf">
         <div class="thumbs">
-          <img src="img/paper1.jpeg" width="10%">
-          <img src="img/paper2.jpeg" width="10%">
-          <img src="img/paper3.jpeg" width="10%">
-          <img src="img/paper4.jpeg" width="10%">
-          <img src="img/paper5.jpeg" width="10%">
-          <img src="img/paper6.jpeg" width="10%">
-          <img src="img/paper7.jpeg" width="10%">
-          <img src="img/paper8.jpeg" width="10%">
-          <img src="img/paper9.jpeg" width="10%">
+          <img src="img/ssal-paper1.jpeg" width="10%">
+          <img src="img/ssal-paper2.jpeg" width="10%">
+          <img src="img/ssal-paper3.jpeg" width="10%">
+          <img src="img/ssal-paper4.jpeg" width="10%">
+          <img src="img/ssal-paper5.jpeg" width="10%">
+          <img src="img/ssal-paper6.jpeg" width="10%">
+          <img src="img/ssal-paper7.jpeg" width="10%">
+          <img src="img/ssal-paper8.jpeg" width="10%">
+          <img src="img/ssal-paper9.jpeg" width="10%">
         </div>
       </a>
       <div>
         <pre class="citation">
-          Cite as: S2SNets \cite{palaciofolz2018s2snets}
+          Cite as: Self-Supervised Autogenous Learning \cite{palacio2020contextual}
 
-          @InProceedings{palaciofolz2018s2snets,
-            author = {Sebastian Palacio and Joachim Folz and Joern Hees and Federico Raue and Damian Borth and Andreas Dengel},
-            title = {What do Deep Networks Like to See},
-            booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-            month = {June},
-            year = {2018}
+          @InProceedings{palacio2020contextual,
+            author = {Sebastian Palacio and Philipp Engler and Joern Hees and Andreas Dengel},
+            title = {Contextual Classification Using Self-Supervised Auxiliary Models for Deep Neural Networks},
+            booktitle = {International Conference on Pattern Recognition (ICPR)},
+            month = {January},
+            year = {2021}
           }
         </pre>
       </div>
     </div>
 
     <div class="container">
-      <h2>Image Reconstructions using Fine-Tuned Autoencoders</h2>
+      <h2>State of the art on Cifar100 and Imagenet</h2>
 
-      <img src="img/reconstructions.png" width="100%" alt="image reconstruction artifacts for SegNet, AlexNet, VGG16 BN, VGGNet, ResNet-50, Inception v3">
+      <img src="img/ssal-sota.png" width="100%" alt="state of the art classification on imagenet and cifar100">
+    </div>
+    <div class="container">
+      <h2>Structured Prediction and Better Interpretation with Class Activation Maps</h2>
+
+      <img src="img/ssal-cam.png" width="100%" alt="more structured interpretation of predictions with ssal auxiliary branches using class activation maps">
     </div>
 
     <div class="container">
-      <h2>Supplemental Material</h2>
+      <h2>Supplementary Material</h2>
 
       <div class="row">
         <div class="col-sm-4 text-center">
-          <a href="https://cloud.dfki.de/owncloud/index.php/s/EszjCE5TjpLTsdo"><img src="img/sup-mat.png" width="57%" alt="PDF with supplementary material."></a>
-          <p>Additional experiments and sample reconstructions</p>
+          <a href="https://cloud.dfki.de/owncloud/index.php/s/FqNkNxYtx5tZfkB"><img src="img/ssal-sup-mat.png" width="57%" alt="PDF with supplementary material."></a>
+          <p>Additional experiments and sample predictions</p>
         </div>
         <div class="col-sm-4 text-center">
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/WHe2SJsQ1_8"></iframe>
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/WHe2SJsQ1_9"></iframe>
           </div>
           <p>Video summary</p>
         </div>
         <div class="col-sm-4 text-center">
-          <a href="https://github.com/spalaciob/s2snets-reconstruction"><img src="img/octocat.jpg" width="65%" alt="Example code."></a>
-          <p>Example prototype to reconstruct images using an autoencoder fine-tuned on ResNet50.</p>
+          <a href="https://github.com/spalaciob/ssal"><img src="img/octocat.jpg" width="65%" alt="Example code."></a>
+          <p>Repository for SSAL networks (with pre-trained models)</p>
         </div>
         <div class="col-sm-4 text-center">
-          <a href="https://spalaciob.blogspot.com/2018/10/what-do-deep-networks-like-to-see.html"><img src="https://1.bp.blogspot.com/-VCO-pyfErBg/W8Xo8zwn5UI/AAAAAAAAbgM/zSxRNea7H986ALWTWPDGZqxAiksP_Wk4ACLcBGAs/s1600/dl_blackbox.png" width="65%" alt="Blog Post"></a>
+          <a href="https://spalaciob.blogspot.com/2020/10/contextual-classification-using-self.html"><img src="https://1.bp.blogspot.com/-FGtTol3cmqg/X5bGzEo29vI/AAAAAAAAiXo/1AzacYY-8JUpEF7mve240Te_WwsrZrksQCLcBGAsYHQ/s631/ssal_overview.png" width="65%" alt="Blog Post"></a>
           <p>Checkout our recent blog post about the paper!</p>
         </div>
 
@@ -292,10 +278,7 @@
 
     <div class="container">
       <h2>Acknowledgments</h2>
-      <p>This work was supported by the BMBF project DeFuseNN (Grant 01IW17002) and the NVIDIA AI Lab (NVAIL) program.</p>
-
-      <p>We would like to express our special gratitude to Adrian Ulges, Christian Schulze and
-      all members at the DLCC for their comments and support.</p>
+      <p>This work was supported by the BMBF projects ExplAINN (01IS19074), DeFuseNN (01IW17002) and the NVIDIA AI Lab program.</p>
     </div>
 
     <div class="container">
